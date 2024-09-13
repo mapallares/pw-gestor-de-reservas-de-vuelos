@@ -3,14 +3,18 @@ package com.pw.gestorreservasvuelos.services;
 import com.pw.gestorreservasvuelos.entities.Cliente;
 import com.pw.gestorreservasvuelos.entities.Reserva;
 import com.pw.gestorreservasvuelos.repositories.ReservaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ReservaService implements IReservaService {
 
+    @Autowired
     private ReservaRepository reservaRepository;
 
     ReservaService(ReservaRepository reservaRepository) {

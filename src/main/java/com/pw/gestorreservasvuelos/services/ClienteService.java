@@ -2,13 +2,17 @@ package com.pw.gestorreservasvuelos.services;
 
 import com.pw.gestorreservasvuelos.entities.Cliente;
 import com.pw.gestorreservasvuelos.repositories.ClienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ClienteService implements IClienteService {
 
+    @Autowired
     private ClienteRepository clienteRepository;
 
     ClienteService(ClienteRepository clienteRepository) {
