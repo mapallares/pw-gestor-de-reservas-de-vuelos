@@ -4,16 +4,20 @@ import com.pw.gestorreservasvuelos.entities.Aeropuerto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AeropuertoRepository extends JpaRepository<Aeropuerto, Long> {
 
     Aeropuerto save (Aeropuerto aeropuerto);
 
-    Aeropuerto findByNombre(String nombre);
+    Optional<Aeropuerto> findByNombre (String nombre);
 
-    Aeropuerto findById(long id);
+    Optional<Aeropuerto> findById (Long id);
+
+    List<Aeropuerto> findByIdIn (Collection<Long> ids);
 
     List<Aeropuerto> findAllByPais (String pais);
 
