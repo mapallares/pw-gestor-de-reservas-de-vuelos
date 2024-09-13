@@ -1,7 +1,6 @@
 package com.pw.gestorreservasvuelos.services;
 
 import com.pw.gestorreservasvuelos.entities.Aeropuerto;
-import com.pw.gestorreservasvuelos.repositories.AerolineaRepository;
 import com.pw.gestorreservasvuelos.repositories.AeropuertoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
