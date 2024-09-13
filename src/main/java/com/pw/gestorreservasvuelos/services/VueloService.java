@@ -4,14 +4,18 @@ import com.pw.gestorreservasvuelos.entities.Aerolinea;
 import com.pw.gestorreservasvuelos.entities.Aeropuerto;
 import com.pw.gestorreservasvuelos.entities.Vuelo;
 import com.pw.gestorreservasvuelos.repositories.VueloRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class VueloService implements IVueloService {
 
+    @Autowired
     private VueloRepository vueloRepository;
 
     VueloService(VueloRepository vueloRepository) {

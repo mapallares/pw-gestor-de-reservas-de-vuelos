@@ -3,13 +3,17 @@ package com.pw.gestorreservasvuelos.services;
 import com.pw.gestorreservasvuelos.entities.Aeropuerto;
 import com.pw.gestorreservasvuelos.repositories.AerolineaRepository;
 import com.pw.gestorreservasvuelos.repositories.AeropuertoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AeropuertoService implements IAeropuertoService {
 
+    @Autowired
     private AeropuertoRepository aeropuertoRepository;
 
     AeropuertoService(AeropuertoRepository aeropuertoRepository) {
