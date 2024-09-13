@@ -8,22 +8,26 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface VueloRepository extends JpaRepository<Vuelo, Long> {
 
-    Vuelo save(Vuelo vuelo);
+    Vuelo save (Vuelo vuelo);
 
-    Vuelo findById (long id);
+    Optional<Vuelo> findById (long id);
 
-    List<Vuelo> findAllByFechaSalida(LocalDate fechaSalida);
+    List<Vuelo> findByIdIn (Collection<Long> ids);
 
-    List<Vuelo> findAllByFechaSalidaAndHoraSalida(LocalDate fechaSalida, LocalTime horaSalida);
+    List<Vuelo> findAllByFechaSalida (LocalDate fechaSalida);
 
-    List<Vuelo> findAllByOrigen(Aeropuerto origen);
+    List<Vuelo> findAllByFechaSalidaAndHoraSalida (LocalDate fechaSalida, LocalTime horaSalida);
 
-    List<Vuelo> findAllByDestino(Aeropuerto destino);
+    List<Vuelo> findAllByOrigen (Aeropuerto origen);
+
+    List<Vuelo> findAllByDestino (Aeropuerto destino);
 
     List<Vuelo> findAllByOrigenAndDestino (Aeropuerto origen, Aeropuerto destino);
 
@@ -31,17 +35,16 @@ public interface VueloRepository extends JpaRepository<Vuelo, Long> {
 
     List<Vuelo> findAllByAerolineaAndOrigenAndDestinoAndFechaSalida (Aerolinea aerolinea, Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida);
 
-    List<Vuelo> findAllByAerolinea(Aerolinea aerolinea);
+    List<Vuelo> findAllByAerolinea (Aerolinea aerolinea);
 
     List<Vuelo> findAllByCapacidad (int capacidad);
 
     List<Vuelo> findAllByDuracion (int duracion);
 
-    List<Vuelo> findAllByFechaSalidaBetween(LocalDate fechaSalida1, LocalDate fechaSalida2);
+    List<Vuelo> findAllByFechaSalidaBetween (LocalDate fechaSalida1, LocalDate fechaSalida2);
 
-    List<Vuelo> findAllByAerolineaAndFechaSalida(Aerolinea aerolinea, LocalDate fechaSalida);
+    List<Vuelo> findAllByAerolineaAndFechaSalida (Aerolinea aerolinea, LocalDate fechaSalida);
 
     List<Vuelo> findAllByAerolineaAndFechaSalidaBetween (Aerolinea aerolinea, LocalDate fechaSalida1, LocalDate fechaSalida2);
-
 
 }
