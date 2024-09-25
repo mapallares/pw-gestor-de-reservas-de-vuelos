@@ -120,4 +120,9 @@ public class VueloService implements IVueloService {
         });
     }
 
+    @Override
+    public void eliminarVuelo(Long id) {
+        vueloRepository.deleteById(id);
+    }
+
 }

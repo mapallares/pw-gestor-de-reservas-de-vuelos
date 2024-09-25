@@ -26,4 +26,6 @@ public interface IAerolineaService {
 
     Optional<Aerolinea> actualizarAerolinea (Long id, Aerolinea aerolinea);
 
+    void eliminarAerolinea (Long id);
+
 }

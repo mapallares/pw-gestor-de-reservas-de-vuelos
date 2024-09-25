@@ -81,4 +81,9 @@ public class PasajeroService implements IPasajeroService {
         });
     }
 
+    @Override
+    public void eliminarPasajero(Long id) {
+        pasajeroRepository.deleteById(id);
+    }
+
 }

@@ -81,4 +81,9 @@ public class ReservaService implements IReservaService {
         });
     }
 
+    @Override
+    public void eliminarReserva(Long id) {
+        reservaRepository.deleteById(id);
+    }
+
 }

@@ -69,4 +69,9 @@ public class AerolineaService implements IAerolineaService {
         });
     }
 
+    @Override
+    public void eliminarAerolinea(Long id) {
+        aerolineaRepository.deleteById(id);
+    }
+
 }
