@@ -32,4 +32,6 @@ public interface IReservaService {
 
     Optional<Reserva> actualizarReserva (Long id, Reserva reserva);
 
+    void eliminarReserva (Long id);
+
 }

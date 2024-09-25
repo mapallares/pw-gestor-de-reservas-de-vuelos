@@ -40,7 +40,7 @@ public class AeropuertoService implements IAeropuertoService {
     }
 
     @Override
-    public List<Aeropuerto> buscarAeropuestos() {
+    public List<Aeropuerto> buscarAeropuertos() {
         return aeropuertoRepository.findAll();
     }
 
@@ -77,6 +77,11 @@ public class AeropuertoService implements IAeropuertoService {
             oldAeropuerto.setPais(aeropuerto.getPais());
             return aeropuertoRepository.save(oldAeropuerto);
         });
+    }
+
+    @Override
+    public void eliminarAeropuerto(Long id) {
+        aeropuertoRepository.deleteById(id);
     }
 
 }

@@ -31,4 +31,6 @@ public interface IPasajeroService {
 
     Optional<Pasajero> actualizarPasajero (Long id, Pasajero pasajero);
 
+    void eliminarPasajero (Long id);
+
 }

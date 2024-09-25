@@ -20,4 +20,6 @@ public interface IClienteService {
 
     Optional<Cliente> actualizarCliente (Long id, Cliente cliente);
 
+    void eliminarCliente (Long id);
+
 }

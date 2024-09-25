@@ -47,4 +47,6 @@ public interface IVueloService {
 
     Optional<Vuelo> actualizarVuelo (Long id, Vuelo vuelo);
 
+    void eliminarVuelo (Long id);
+
 }

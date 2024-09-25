@@ -16,7 +16,7 @@ public interface IAeropuertoService {
 
     List<Aeropuerto> buscarAeropuestosPorIds (Collection<Long> ids);
 
-    List<Aeropuerto> buscarAeropuestos ();
+    List<Aeropuerto> buscarAeropuertos ();
 
     List<Aeropuerto> buscarAeropuertosPorPais (String pais);
 
@@ -29,5 +29,7 @@ public interface IAeropuertoService {
     List<Aeropuerto> buscarAeropuertosPorNombre (String nombre);
 
     Optional<Aeropuerto> actualizarAeropuerto (Long id, Aeropuerto aeropuerto);
+
+    void eliminarAeropuerto (Long id);
 
 }
