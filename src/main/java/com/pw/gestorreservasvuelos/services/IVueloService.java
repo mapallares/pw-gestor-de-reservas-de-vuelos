@@ -2,7 +2,7 @@ package com.pw.gestorreservasvuelos.services;
 
 import com.pw.gestorreservasvuelos.entities.Aerolinea;
 import com.pw.gestorreservasvuelos.entities.Aeropuerto;
-import com.pw.gestorreservasvuelos.entities.Vuelo;
+import com.pw.gestorreservasvuelos.dto.VueloDto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,41 +11,41 @@ import java.util.Optional;
 
 public interface IVueloService {
 
-    Vuelo guardarVuelo (Vuelo vuelo);
+    VueloDto guardarVuelo (VueloDto vuelo);
 
-    Optional<Vuelo> buscarVueloPorId (Long id);
+    Optional<VueloDto> buscarVueloPorId (Long id);
 
-    List<Vuelo> buscarVuelosPorIds (List<Long> ids);
+    List<VueloDto> buscarVuelosPorIds (List<Long> ids);
 
-    List<Vuelo> buscarVuelos ();
+    List<VueloDto> buscarVuelos ();
 
-    List<Vuelo> buscarVuelosPorFechaSalida (LocalDate fechaSalida);
+    List<VueloDto> buscarVuelosPorFechaSalida (LocalDate fechaSalida);
 
-    List<Vuelo> buscarVuelosPorFechaSalidaYHoraSalida (LocalDate fechaSalida, LocalTime horaSalida);
+    List<VueloDto> buscarVuelosPorFechaSalidaYHoraSalida (LocalDate fechaSalida, LocalTime horaSalida);
 
-    List<Vuelo> buscarVuelosPorOrigen (Aeropuerto origen);
+    List<VueloDto> buscarVuelosPorOrigen (Aeropuerto origen);
 
-    List<Vuelo> buscarVuelosPorDestino (Aeropuerto destino);
+    List<VueloDto> buscarVuelosPorDestino (Aeropuerto destino);
 
-    List<Vuelo> buscarVuelosPorOrigenYDestino (Aeropuerto origen, Aeropuerto destino);
+    List<VueloDto> buscarVuelosPorOrigenYDestino (Aeropuerto origen, Aeropuerto destino);
 
-    List<Vuelo> buscarVuelosPorOrigenYDestinoYFechaSalida (Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida);
+    List<VueloDto> buscarVuelosPorOrigenYDestinoYFechaSalida (Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida);
 
-    List<Vuelo> buscarVuelosPorAerolineaYOrigenYDestinoYFechaSalida (Aerolinea aerolinea, Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida);
+    List<VueloDto> buscarVuelosPorAerolineaYOrigenYDestinoYFechaSalida (Aerolinea aerolinea, Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida);
 
-    List<Vuelo> buscarVuelosPorAerolinea (Aerolinea aerolinea);
+    List<VueloDto> buscarVuelosPorAerolinea (Aerolinea aerolinea);
 
-    List<Vuelo> buscarVuelosPorCapacidad (int capacidad);
+    List<VueloDto> buscarVuelosPorCapacidad (Integer capacidad);
 
-    List<Vuelo> buscarVuelosPorDuracion (int duracion);
+    List<VueloDto> buscarVuelosPorDuracion (Integer duracion);
 
-    List<Vuelo> buscarVuelosPorFechaSalidaEntre (LocalDate fechaSalida1, LocalDate fechaSalida2);
+    List<VueloDto> buscarVuelosPorFechaSalidaEntre (LocalDate fechaSalida1, LocalDate fechaSalida2);
 
-    List<Vuelo> buscarVuelosPorAerolineaYFechaSalida (Aerolinea aerolinea, LocalDate fechaSalida);
+    List<VueloDto> buscarVuelosPorAerolineaYFechaSalida (Aerolinea aerolinea, LocalDate fechaSalida);
 
-    List<Vuelo> buscarVuelosPorAerolineaYFechaSalidaEntre (Aerolinea aerolinea, LocalDate fechaSalida1, LocalDate fechaSalida2);
+    List<VueloDto> buscarVuelosPorAerolineaYFechaSalidaEntre (Aerolinea aerolinea, LocalDate fechaSalida1, LocalDate fechaSalida2);
 
-    Optional<Vuelo> actualizarVuelo (Long id, Vuelo vuelo);
+    Optional<VueloDto> actualizarVuelo (Long id, VueloDto vuelo);
 
     void eliminarVuelo (Long id);
 

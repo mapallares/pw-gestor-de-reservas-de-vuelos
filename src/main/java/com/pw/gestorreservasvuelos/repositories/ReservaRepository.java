@@ -25,10 +25,10 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
     List<Reserva> findAllByCliente (Cliente cliente);
 
-    List<Reserva> findAllByNumeroPasajeros (int numeroPasajeros);
+    List<Reserva> findAllByNumeroPasajeros (Integer numeroPasajeros);
 
-    List<Reserva> findAllByNumeroPasajerosLessThanEqual (int numeroPasajeros);
+    List<Reserva> findAllByNumeroPasajerosLessThanEqual (Integer numeroPasajeros);
 
-    List<Reserva> findAllByNumeroPasajerosGreaterThanEqual (int numeroPasajeros);
+    List<Reserva> findAllByNumeroPasajerosGreaterThanEqual (Integer numeroPasajeros);
 
 }

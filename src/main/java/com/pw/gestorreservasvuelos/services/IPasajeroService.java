@@ -1,6 +1,6 @@
 package com.pw.gestorreservasvuelos.services;
 
-import com.pw.gestorreservasvuelos.entities.Pasajero;
+import com.pw.gestorreservasvuelos.dto.PasajeroDto;
 import com.pw.gestorreservasvuelos.entities.Reserva;
 
 import java.util.Collection;
@@ -9,27 +9,27 @@ import java.util.Optional;
 
 public interface IPasajeroService {
 
-    Pasajero guardarPasajero (Pasajero pasajero);
+    PasajeroDto guardarPasajero (PasajeroDto pasajero);
 
-    Optional<Pasajero> buscarPasajeroPorIdentificacion (String identificacion);
+    Optional<PasajeroDto> buscarPasajeroPorIdentificacion (String identificacion);
 
-    Optional<Pasajero> buscarPasajeroPorId (Long id);
+    Optional<PasajeroDto> buscarPasajeroPorId (Long id);
 
-    List<Pasajero> buscarPasajerosPorIds (Collection<Long> ids);
+    List<PasajeroDto> buscarPasajerosPorIds (Collection<Long> ids);
 
-    List<Pasajero> buscarPasajeros ();
+    List<PasajeroDto> buscarPasajeros ();
 
-    List<Pasajero> buscarPasajerosPorNombre (String nombre);
+    List<PasajeroDto> buscarPasajerosPorNombre (String nombre);
 
-    List<Pasajero> buscarPasajerosPorApellido (String apellido);
+    List<PasajeroDto> buscarPasajerosPorApellido (String apellido);
 
-    List<Pasajero> buscarPasajerosPorNombreOApellido (String nombre, String apellido);
+    List<PasajeroDto> buscarPasajerosPorNombreOApellido (String nombre, String apellido);
 
-    List<Pasajero> buscarPasajerosPorNombreYApellido (String nombre, String apellido);
+    List<PasajeroDto> buscarPasajerosPorNombreYApellido (String nombre, String apellido);
 
-    List<Pasajero> buscarPasajerosPorReserva (Reserva reserva);
+    List<PasajeroDto> buscarPasajerosPorReserva (Reserva reserva);
 
-    Optional<Pasajero> actualizarPasajero (Long id, Pasajero pasajero);
+    Optional<PasajeroDto> actualizarPasajero (Long id, PasajeroDto pasajero);
 
     void eliminarPasajero (Long id);
 

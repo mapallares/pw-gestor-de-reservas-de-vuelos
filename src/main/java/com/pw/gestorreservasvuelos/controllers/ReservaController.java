@@ -1,6 +1,7 @@
 package com.pw.gestorreservasvuelos.controllers;
 
-import com.pw.gestorreservasvuelos.entities.Reserva;
+import com.pw.gestorreservasvuelos.dto.ReservaDto;
+import com.pw.gestorreservasvuelos.exceptions.VueloNotFoundException;
 import com.pw.gestorreservasvuelos.services.ReservaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,36 +23,36 @@ public class ReservaController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Reserva>> getAllReservas() {
+    public ResponseEntity<List<ReservaDto>> getAllReservas() {
         return ResponseEntity.ok(reservaService.buscarReservas());
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Reserva> getReservaById(@PathVariable Long id) {
+    public ResponseEntity<ReservaDto> getReservaById(@PathVariable Long id) {
         return reservaService.buscarReservaPorId(id)
                 .map(reserva -> ResponseEntity.ok().body(reserva))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(VueloNotFoundException::new);
     }
 
     @PostMapping()
-    public ResponseEntity<Reserva> createReserva(@RequestBody Reserva reserva) throws URISyntaxException {
+    public ResponseEntity<ReservaDto> createReserva(@RequestBody ReservaDto reserva) throws URISyntaxException {
         return createNewReserva(reserva);
     }
 
     @PutMapping("/id")
-    public ResponseEntity<Reserva> upatateReserva(@PathVariable Long id, @RequestBody Reserva newReserva) {
-        Optional<Reserva> reservaUpadated = reservaService.actualizarReserva(id, newReserva);
+    public ResponseEntity<ReservaDto> updateReserva(@PathVariable Long id, @RequestBody ReservaDto newReserva) {
+        Optional<ReservaDto> reservaUpadated = reservaService.actualizarReserva(id, newReserva);
         return reservaUpadated.map(reserva -> ResponseEntity.ok(reserva))
                 .orElseGet(() -> {
                     return createNewReserva(newReserva);
                 });
     }
 
-    private ResponseEntity<Reserva> createNewReserva(Reserva reserva) {
-        Reserva newReserva = reservaService.guardarReserva(reserva);
+    private ResponseEntity<ReservaDto> createNewReserva(ReservaDto reserva) {
+        ReservaDto newReserva = reservaService.guardarReserva(reserva);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(newReserva.getId())
+                .buildAndExpand(newReserva.id())
                 .toUri();
         return ResponseEntity.created(location).body(newReserva);
     }

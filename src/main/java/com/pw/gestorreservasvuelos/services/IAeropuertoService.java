@@ -1,6 +1,6 @@
 package com.pw.gestorreservasvuelos.services;
 
-import com.pw.gestorreservasvuelos.entities.Aeropuerto;
+import com.pw.gestorreservasvuelos.dto.AeropuertoDto;
 
 import java.util.Collection;
 import java.util.List;
@@ -8,27 +8,27 @@ import java.util.Optional;
 
 public interface IAeropuertoService {
 
-    Aeropuerto guardarAeropuerto (Aeropuerto aeropuerto);
+    AeropuertoDto guardarAeropuerto (AeropuertoDto aeropuerto);
 
-    Optional<Aeropuerto> buscarAeropuertoPorNombre (String nombre);
+    Optional<AeropuertoDto> buscarAeropuertoPorNombre (String nombre);
 
-    Optional<Aeropuerto> buscarAeropuertoPorId (Long id);
+    Optional<AeropuertoDto> buscarAeropuertoPorId (Long id);
 
-    List<Aeropuerto> buscarAeropuestosPorIds (Collection<Long> ids);
+    List<AeropuertoDto> buscarAeropuestosPorIds (Collection<Long> ids);
 
-    List<Aeropuerto> buscarAeropuertos ();
+    List<AeropuertoDto> buscarAeropuertos ();
 
-    List<Aeropuerto> buscarAeropuertosPorPais (String pais);
+    List<AeropuertoDto> buscarAeropuertosPorPais (String pais);
 
-    List<Aeropuerto> buscarAeropuertosPorCiudad (String ciudad);
+    List<AeropuertoDto> buscarAeropuertosPorCiudad (String ciudad);
 
-    List<Aeropuerto> buscarAeropuertosPorPaisOCiudad (String pais, String ciudad);
+    List<AeropuertoDto> buscarAeropuertosPorPaisOCiudad (String pais, String ciudad);
 
-    List<Aeropuerto> buscarAeropuertosPorPaisYCiudad (String pais, String ciudad);
+    List<AeropuertoDto> buscarAeropuertosPorPaisYCiudad (String pais, String ciudad);
 
-    List<Aeropuerto> buscarAeropuertosPorNombre (String nombre);
+    List<AeropuertoDto> buscarAeropuertosPorNombre (String nombre);
 
-    Optional<Aeropuerto> actualizarAeropuerto (Long id, Aeropuerto aeropuerto);
+    Optional<AeropuertoDto> actualizarAeropuerto (Long id, AeropuertoDto aeropuerto);
 
     void eliminarAeropuerto (Long id);
 

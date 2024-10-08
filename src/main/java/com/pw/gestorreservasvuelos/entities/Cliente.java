@@ -3,6 +3,7 @@ package com.pw.gestorreservasvuelos.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,9 @@ public class Cliente {
 
     @Column(nullable = false)
     private String apellido;
+
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento;
 
     private String direccion;
 

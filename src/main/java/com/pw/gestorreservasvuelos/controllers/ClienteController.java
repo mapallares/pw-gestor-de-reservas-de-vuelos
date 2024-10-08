@@ -1,6 +1,7 @@
 package com.pw.gestorreservasvuelos.controllers;
 
-import com.pw.gestorreservasvuelos.entities.Cliente;
+import com.pw.gestorreservasvuelos.dto.ClienteDto;
+import com.pw.gestorreservasvuelos.exceptions.ClienteNotFoundException;
 import com.pw.gestorreservasvuelos.services.ClienteService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,36 +23,36 @@ public class ClienteController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Cliente>> getAllClientes() {
+    public ResponseEntity<List<ClienteDto>> getAllClientes() {
         return ResponseEntity.ok(clienteService.buscarClientes());
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Cliente> getClienteById(@PathVariable Long id) {
+    public ResponseEntity<ClienteDto> getClienteById(@PathVariable Long id) {
         return clienteService.buscarClientePorId(id)
                 .map(cliente -> ResponseEntity.ok().body(cliente))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(ClienteNotFoundException::new);
     }
 
     @PostMapping()
-    public ResponseEntity<Cliente> createCliente(@RequestBody Cliente cliente) throws URISyntaxException {
+    public ResponseEntity<ClienteDto> createCliente(@RequestBody ClienteDto cliente) throws URISyntaxException {
         return createNewCliente(cliente);
     }
 
     @PutMapping("/id")
-    public ResponseEntity<Cliente> upatateCliente(@PathVariable Long id, @RequestBody Cliente newCliente) {
-        Optional<Cliente> clienteUpadated = clienteService.actualizarCliente(id, newCliente);
+    public ResponseEntity<ClienteDto> updateCliente(@PathVariable Long id, @RequestBody ClienteDto newCliente) {
+        Optional<ClienteDto> clienteUpadated = clienteService.actualizarCliente(id, newCliente);
         return clienteUpadated.map(cliente -> ResponseEntity.ok(cliente))
                 .orElseGet(() -> {
                     return createNewCliente(newCliente);
                 });
     }
 
-    private ResponseEntity<Cliente> createNewCliente(Cliente cliente) {
-        Cliente newCliente = clienteService.guardarCliente(cliente);
+    private ResponseEntity<ClienteDto> createNewCliente(ClienteDto cliente) {
+        ClienteDto newCliente = clienteService.guardarCliente(cliente);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(newCliente.getId())
+                .buildAndExpand(newCliente.id())
                 .toUri();
         return ResponseEntity.created(location).body(newCliente);
     }

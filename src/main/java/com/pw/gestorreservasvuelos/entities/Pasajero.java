@@ -3,6 +3,8 @@ package com.pw.gestorreservasvuelos.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "pasajeros")
 @Getter
@@ -20,6 +22,9 @@ public class Pasajero {
 
     @Column(nullable = false)
     private String apellido;
+
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento;
 
     @Column(nullable = false)
     private String identificacion;

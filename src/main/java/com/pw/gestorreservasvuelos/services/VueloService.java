@@ -1,14 +1,16 @@
 package com.pw.gestorreservasvuelos.services;
 
+import com.pw.gestorreservasvuelos.dto.VueloMapper;
 import com.pw.gestorreservasvuelos.entities.Aerolinea;
 import com.pw.gestorreservasvuelos.entities.Aeropuerto;
-import com.pw.gestorreservasvuelos.entities.Vuelo;
+import com.pw.gestorreservasvuelos.dto.VueloDto;
 import com.pw.gestorreservasvuelos.repositories.VueloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,106 +19,135 @@ public class VueloService implements IVueloService {
 
     @Autowired
     private VueloRepository vueloRepository;
+    private final VueloMapper vueloMapper;
 
-    VueloService(VueloRepository vueloRepository) {
+    VueloService(VueloRepository vueloRepository, VueloMapper vueloMapper) {
         this.vueloRepository = vueloRepository;
+        this.vueloMapper = vueloMapper;
     }
 
     @Override
-    public Vuelo guardarVuelo(Vuelo vuelo) {
-        return vueloRepository.save(vuelo);
+    public VueloDto guardarVuelo(VueloDto vuelo) {
+        return vueloMapper.vueloToVueloDtoWithoutId(vueloRepository.save(vueloMapper.vueloDtoWithoutIdToVuelo(vuelo)));
     }
 
     @Override
-    public Optional<Vuelo> buscarVueloPorId(Long id) {
-        return vueloRepository.findById(id);
+    public Optional<VueloDto> buscarVueloPorId(Long id) {
+        return vueloRepository.findById(id).map(vuelo -> vueloMapper.vueloToVueloDto(vuelo));
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorIds(List<Long> ids) {
-        return vueloRepository.findByIdIn(ids);
+    public List<VueloDto> buscarVuelosPorIds(List<Long> ids) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findByIdIn(ids).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelos() {
-        return vueloRepository.findAll();
+    public List<VueloDto> buscarVuelos() {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAll().forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorFechaSalida(LocalDate fechaSalida) {
-        return vueloRepository.findAllByFechaSalida(fechaSalida);
+    public List<VueloDto> buscarVuelosPorFechaSalida(LocalDate fechaSalida) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByFechaSalida(fechaSalida).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorFechaSalidaYHoraSalida(LocalDate fechaSalida, LocalTime horaSalida) {
-        return vueloRepository.findAllByFechaSalidaAndHoraSalida(fechaSalida, horaSalida);
+    public List<VueloDto> buscarVuelosPorFechaSalidaYHoraSalida(LocalDate fechaSalida, LocalTime horaSalida) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByFechaSalidaAndHoraSalida(fechaSalida, horaSalida).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorOrigen(Aeropuerto origen) {
-        return List.of();
+    public List<VueloDto> buscarVuelosPorOrigen(Aeropuerto origen) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByOrigen(origen).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorDestino(Aeropuerto destino) {
-        return vueloRepository.findAllByDestino(destino);
+    public List<VueloDto> buscarVuelosPorDestino(Aeropuerto destino) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByDestino(destino).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorOrigenYDestino(Aeropuerto origen, Aeropuerto destino) {
-        return vueloRepository.findAllByOrigenAndDestino(origen, destino);
+    public List<VueloDto> buscarVuelosPorOrigenYDestino(Aeropuerto origen, Aeropuerto destino) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByOrigenAndDestino(origen, destino).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorOrigenYDestinoYFechaSalida(Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida) {
-        return vueloRepository.findAllByOrigenAndDestinoAndFechaSalida(origen, destino, fechaSalida);
+    public List<VueloDto> buscarVuelosPorOrigenYDestinoYFechaSalida(Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByOrigenAndDestinoAndFechaSalida(origen, destino, fechaSalida).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorAerolineaYOrigenYDestinoYFechaSalida(Aerolinea aerolinea, Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida) {
-        return vueloRepository.findAllByAerolineaAndOrigenAndDestinoAndFechaSalida(aerolinea, origen, destino, fechaSalida);
+    public List<VueloDto> buscarVuelosPorAerolineaYOrigenYDestinoYFechaSalida(Aerolinea aerolinea, Aeropuerto origen, Aeropuerto destino, LocalDate fechaSalida) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByAerolineaAndOrigenAndDestinoAndFechaSalida(aerolinea, origen, destino, fechaSalida).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorAerolinea(Aerolinea aerolinea) {
-        return vueloRepository.findAllByAerolinea(aerolinea);
+    public List<VueloDto> buscarVuelosPorAerolinea(Aerolinea aerolinea) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByAerolinea(aerolinea).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorCapacidad(int capacidad) {
-        return vueloRepository.findAllByCapacidad(capacidad);
+    public List<VueloDto> buscarVuelosPorCapacidad(Integer capacidad) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByCapacidad(capacidad).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorDuracion(int duracion) {
-        return vueloRepository.findAllByDuracion(duracion);
+    public List<VueloDto> buscarVuelosPorDuracion(Integer duracion) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByDuracion(duracion).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorFechaSalidaEntre(LocalDate fechaSalida1, LocalDate fechaSalida2) {
-        return vueloRepository.findAllByFechaSalidaBetween(fechaSalida1, fechaSalida2);
+    public List<VueloDto> buscarVuelosPorFechaSalidaEntre(LocalDate fechaSalida1, LocalDate fechaSalida2) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByFechaSalidaBetween(fechaSalida1, fechaSalida2).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorAerolineaYFechaSalida(Aerolinea aerolinea, LocalDate fechaSalida) {
-        return vueloRepository.findAllByAerolineaAndFechaSalida(aerolinea, fechaSalida);
+    public List<VueloDto> buscarVuelosPorAerolineaYFechaSalida(Aerolinea aerolinea, LocalDate fechaSalida) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByAerolineaAndFechaSalida(aerolinea, fechaSalida).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public List<Vuelo> buscarVuelosPorAerolineaYFechaSalidaEntre(Aerolinea aerolinea, LocalDate fechaSalida1, LocalDate fechaSalida2) {
-        return vueloRepository.findAllByAerolineaAndFechaSalidaBetween(aerolinea, fechaSalida1, fechaSalida2);
+    public List<VueloDto> buscarVuelosPorAerolineaYFechaSalidaEntre(Aerolinea aerolinea, LocalDate fechaSalida1, LocalDate fechaSalida2) {
+        List<VueloDto> vuelos = new ArrayList<>();
+        vueloRepository.findAllByAerolineaAndFechaSalidaBetween(aerolinea, fechaSalida1, fechaSalida2).forEach(vuelo -> vuelos.add(vueloMapper.vueloToVueloDtoWithoutId(vuelo)));
+        return vuelos;
     }
 
     @Override
-    public Optional<Vuelo> actualizarVuelo(Long id, Vuelo vuelo) {
+    public Optional<VueloDto> actualizarVuelo(Long id, VueloDto vuelo) {
         return vueloRepository.findById(id).map(oldVuelo -> {
-            oldVuelo.setOrigen(vuelo.getOrigen());
-            oldVuelo.setDestino(vuelo.getDestino());
-            oldVuelo.setAerolinea(vuelo.getAerolinea());
-            oldVuelo.setFechaSalida(vuelo.getFechaSalida());
-            oldVuelo.setCapacidad(vuelo.getCapacidad());
-            oldVuelo.setDuracion(vuelo.getDuracion());
-            return vueloRepository.save(oldVuelo);
+            oldVuelo.setFechaSalida(vuelo.fechaSalida());
+            oldVuelo.setCapacidad(vuelo.capacidad());
+            oldVuelo.setDuracion(vuelo.duracion());
+            return vueloMapper.vueloToVueloDto(vueloRepository.save(oldVuelo));
         });
     }
 

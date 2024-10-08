@@ -1,6 +1,7 @@
 package com.pw.gestorreservasvuelos.controllers;
 
-import com.pw.gestorreservasvuelos.entities.Vuelo;
+import com.pw.gestorreservasvuelos.dto.VueloDto;
+import com.pw.gestorreservasvuelos.exceptions.VueloNotFoundException;
 import com.pw.gestorreservasvuelos.services.VueloService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,36 +23,36 @@ public class VueloController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Vuelo>> getAllVuelos() {
+    public ResponseEntity<List<VueloDto>> getAllVuelos() {
         return ResponseEntity.ok(vueloService.buscarVuelos());
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Vuelo> getVueloById(@PathVariable Long id) {
+    public ResponseEntity<VueloDto> getVueloById(@PathVariable Long id) {
         return vueloService.buscarVueloPorId(id)
                 .map(vuelo -> ResponseEntity.ok().body(vuelo))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(VueloNotFoundException::new);
     }
 
     @PostMapping()
-    public ResponseEntity<Vuelo> createVuelo(@RequestBody Vuelo vuelo) throws URISyntaxException {
+    public ResponseEntity<VueloDto> createVuelo(@RequestBody VueloDto vuelo) throws URISyntaxException {
         return createNewVuelo(vuelo);
     }
 
     @PutMapping("/id")
-    public ResponseEntity<Vuelo> upatateVuelo(@PathVariable Long id, @RequestBody Vuelo newVuelo) {
-        Optional<Vuelo> vueloUpadated = vueloService.actualizarVuelo(id, newVuelo);
+    public ResponseEntity<VueloDto> updateVuelo(@PathVariable Long id, @RequestBody VueloDto newVuelo) {
+        Optional<VueloDto> vueloUpadated = vueloService.actualizarVuelo(id, newVuelo);
         return vueloUpadated.map(vuelo -> ResponseEntity.ok(vuelo))
                 .orElseGet(() -> {
                     return createNewVuelo(newVuelo);
                 });
     }
 
-    private ResponseEntity<Vuelo> createNewVuelo(Vuelo vuelo) {
-        Vuelo newVuelo = vueloService.guardarVuelo(vuelo);
+    private ResponseEntity<VueloDto> createNewVuelo(VueloDto vuelo) {
+        VueloDto newVuelo = vueloService.guardarVuelo(vuelo);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(newVuelo.getId())
+                .buildAndExpand(newVuelo.id())
                 .toUri();
         return ResponseEntity.created(location).body(newVuelo);
     }

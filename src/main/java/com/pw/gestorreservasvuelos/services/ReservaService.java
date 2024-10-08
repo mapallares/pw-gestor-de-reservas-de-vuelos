@@ -1,12 +1,14 @@
 package com.pw.gestorreservasvuelos.services;
 
+import com.pw.gestorreservasvuelos.dto.ReservaMapper;
 import com.pw.gestorreservasvuelos.entities.Cliente;
-import com.pw.gestorreservasvuelos.entities.Reserva;
+import com.pw.gestorreservasvuelos.dto.ReservaDto;
 import com.pw.gestorreservasvuelos.repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -16,68 +18,85 @@ public class ReservaService implements IReservaService {
 
     @Autowired
     private ReservaRepository reservaRepository;
+    private final ReservaMapper reservaMapper;
 
-    ReservaService(ReservaRepository reservaRepository) {
+    ReservaService(ReservaRepository reservaRepository, ReservaMapper reservaMapper) {
         this.reservaRepository = reservaRepository;
+        this.reservaMapper = reservaMapper;
     }
 
     @Override
-    public Reserva guardarReserva(Reserva reserva) {
-        return reservaRepository.save(reserva);
+    public ReservaDto guardarReserva(ReservaDto reserva) {
+        return reservaMapper.reservaToReservaDtoWithoutId(reservaRepository.save(reservaMapper.reservaDtoWithoutIdToReserva(reserva)));
     }
 
     @Override
-    public Optional<Reserva> buscarReservaPorId(Long id) {
-        return reservaRepository.findById(id);
+    public Optional<ReservaDto> buscarReservaPorId(Long id) {
+        return reservaRepository.findById(id).map(reserva -> reservaMapper.reservaToReservaDto(reserva));
     }
 
     @Override
-    public List<Reserva> buscarReservasPorIds(Collection<Long> ids) {
-        return reservaRepository.findByIdIn(ids);
+    public List<ReservaDto> buscarReservasPorIds(Collection<Long> ids) {
+        List<ReservaDto> reservas = new ArrayList<>();
+        reservaRepository.findByIdIn(ids).forEach(reserva -> reservas.add(reservaMapper.reservaToReservaDtoWithoutId(reserva)));
+        return reservas;
     }
 
     @Override
-    public List<Reserva> buscarReservas() {
-        return reservaRepository.findAll();
+    public List<ReservaDto> buscarReservas() {
+        List<ReservaDto> reservas = new ArrayList<>();
+        reservaRepository.findAll().forEach(reserva -> reservas.add(reservaMapper.reservaToReservaDtoWithoutId(reserva)));
+        return reservas;
     }
 
     @Override
-    public List<Reserva> buscarReservasPorFechaReserva(LocalDate fechaReserva) {
-        return reservaRepository.findAllByFechaReserva(fechaReserva);
+    public List<ReservaDto> buscarReservasPorFechaReserva(LocalDate fechaReserva) {
+        List<ReservaDto> reservas = new ArrayList<>();
+        reservaRepository.findAllByFechaReserva(fechaReserva).forEach(reserva -> reservas.add(reservaMapper.reservaToReservaDtoWithoutId(reserva)));
+        return reservas;
     }
 
     @Override
-    public List<Reserva> buscarReservasPorFechaReservaEntre(LocalDate fechaReserva1, LocalDate fechaReserva2) {
-        return reservaRepository.findAllByFechaReservaBetween(fechaReserva1, fechaReserva2);
+    public List<ReservaDto> buscarReservasPorFechaReservaEntre(LocalDate fechaReserva1, LocalDate fechaReserva2) {
+        List<ReservaDto> reservas = new ArrayList<>();
+        reservaRepository.findAllByFechaReservaBetween(fechaReserva1, fechaReserva2).forEach(reserva -> reservas.add(reservaMapper.reservaToReservaDtoWithoutId(reserva)));
+        return reservas;
     }
 
     @Override
-    public List<Reserva> buscarReservasPorCliente(Cliente cliente) {
-        return reservaRepository.findAllByCliente(cliente);
+    public List<ReservaDto> buscarReservasPorCliente(Cliente cliente) {
+        List<ReservaDto> reservas = new ArrayList<>();
+        reservaRepository.findAllByCliente(cliente).forEach(reserva -> reservas.add(reservaMapper.reservaToReservaDtoWithoutId(reserva)));
+        return reservas;
     }
 
     @Override
-    public List<Reserva> buscarReservasPorNumeroPasajeros(int numeroPasajeros) {
-        return reservaRepository.findAllByNumeroPasajeros(numeroPasajeros);
+    public List<ReservaDto> buscarReservasPorNumeroPasajeros(Integer numeroPasajeros) {
+        List<ReservaDto> reservas = new ArrayList<>();
+        reservaRepository.findAllByNumeroPasajeros(numeroPasajeros).forEach(reserva -> reservas.add(reservaMapper.reservaToReservaDtoWithoutId(reserva)));
+        return reservas;
     }
 
     @Override
-    public List<Reserva> buscarReservasPorNumeroPasajerosMenorOIgualQue(int numeroPasajeros) {
-        return reservaRepository.findAllByNumeroPasajerosLessThanEqual(numeroPasajeros);
+    public List<ReservaDto> buscarReservasPorNumeroPasajerosMenorOIgualQue(Integer numeroPasajeros) {
+        List<ReservaDto> reservas = new ArrayList<>();
+        reservaRepository.findAllByNumeroPasajerosLessThanEqual(numeroPasajeros).forEach(reserva -> reservas.add(reservaMapper.reservaToReservaDtoWithoutId(reserva)));
+        return reservas;
     }
 
     @Override
-    public List<Reserva> buscarReservasPorNumeroPasajeroMayorOIgualQue(int numeroPasajeros) {
-        return reservaRepository.findAllByNumeroPasajerosGreaterThanEqual(numeroPasajeros);
+    public List<ReservaDto> buscarReservasPorNumeroPasajeroMayorOIgualQue(Integer numeroPasajeros) {
+        List<ReservaDto> reservas = new ArrayList<>();
+        reservaRepository.findAllByNumeroPasajerosGreaterThanEqual(numeroPasajeros).forEach(reserva -> reservas.add(reservaMapper.reservaToReservaDtoWithoutId(reserva)));
+        return reservas;
     }
 
     @Override
-    public Optional<Reserva> actualizarReserva(Long id, Reserva reserva) {
+    public Optional<ReservaDto> actualizarReserva(Long id, ReservaDto reserva) {
         return reservaRepository.findById(id).map(oldReserva -> {
-            oldReserva.setCliente(reserva.getCliente());
-            oldReserva.setFechaReserva(reserva.getFechaReserva());
-            oldReserva.setNumeroPasajeros(reserva.getNumeroPasajeros());
-            return reservaRepository.save(oldReserva);
+            oldReserva.setFechaReserva(reserva.fechaReserva());
+            oldReserva.setNumeroPasajeros(reserva.numeroPasajeros());
+            return reservaMapper.reservaToReservaDto(reservaRepository.save(oldReserva));
         });
     }
 
