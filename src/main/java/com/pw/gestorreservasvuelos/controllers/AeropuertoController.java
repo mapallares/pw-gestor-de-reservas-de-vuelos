@@ -1,6 +1,7 @@
 package com.pw.gestorreservasvuelos.controllers;
 
-import com.pw.gestorreservasvuelos.entities.Aeropuerto;
+import com.pw.gestorreservasvuelos.dto.AeropuertoDto;
+import com.pw.gestorreservasvuelos.exceptions.AeropuertoNotFoundException;
 import com.pw.gestorreservasvuelos.services.AeropuertoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,36 +23,36 @@ public class AeropuertoController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Aeropuerto>> getAllAeropuertos() {
+    public ResponseEntity<List<AeropuertoDto>> getAllAeropuertos() {
         return ResponseEntity.ok(aeropuertoService.buscarAeropuertos());
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Aeropuerto> getAeropuertoById(@PathVariable Long id) {
+    public ResponseEntity<AeropuertoDto> getAeropuertoById(@PathVariable Long id) {
         return aeropuertoService.buscarAeropuertoPorId(id)
                 .map(aeropuerto -> ResponseEntity.ok().body(aeropuerto))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(AeropuertoNotFoundException::new);
     }
 
     @PostMapping()
-    public ResponseEntity<Aeropuerto> createAeropuerto(@RequestBody Aeropuerto aeropuerto) throws URISyntaxException {
+    public ResponseEntity<AeropuertoDto> createAeropuerto(@RequestBody AeropuertoDto aeropuerto) throws URISyntaxException {
         return createNewAeropuerto(aeropuerto);
     }
 
     @PutMapping("/id")
-    public ResponseEntity<Aeropuerto> upatateAeropuerto(@PathVariable Long id, @RequestBody Aeropuerto newAeropuerto) {
-        Optional<Aeropuerto> aeropuertoUpadated = aeropuertoService.actualizarAeropuerto(id, newAeropuerto);
+    public ResponseEntity<AeropuertoDto> updateAeropuerto(@PathVariable Long id, @RequestBody AeropuertoDto newAeropuerto) {
+        Optional<AeropuertoDto> aeropuertoUpadated = aeropuertoService.actualizarAeropuerto(id, newAeropuerto);
         return aeropuertoUpadated.map(aeropuerto -> ResponseEntity.ok(aeropuerto))
                 .orElseGet(() -> {
                     return createNewAeropuerto(newAeropuerto);
                 });
     }
 
-    private ResponseEntity<Aeropuerto> createNewAeropuerto(Aeropuerto aeropuerto) {
-        Aeropuerto newAeropuerto = aeropuertoService.guardarAeropuerto(aeropuerto);
+    private ResponseEntity<AeropuertoDto> createNewAeropuerto(AeropuertoDto aeropuerto) {
+        AeropuertoDto newAeropuerto = aeropuertoService.guardarAeropuerto(aeropuerto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(newAeropuerto.getId())
+                .buildAndExpand(newAeropuerto.id())
                 .toUri();
         return ResponseEntity.created(location).body(newAeropuerto);
     }

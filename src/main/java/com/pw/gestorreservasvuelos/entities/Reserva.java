@@ -27,7 +27,7 @@ public class Reserva {
     private LocalDate fechaReserva;
 
     @Column(nullable = false)
-    private int numeroPasajeros;
+    private Integer numeroPasajeros;
 
     @OneToMany(mappedBy = "reserva", fetch = FetchType.EAGER)
     private List<Pasajero> pasajeros;

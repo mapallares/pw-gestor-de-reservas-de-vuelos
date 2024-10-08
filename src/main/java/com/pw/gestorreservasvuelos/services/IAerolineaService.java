@@ -1,6 +1,6 @@
 package com.pw.gestorreservasvuelos.services;
 
-import com.pw.gestorreservasvuelos.entities.Aerolinea;
+import com.pw.gestorreservasvuelos.dto.AerolineaDto;
 
 import java.util.Collection;
 import java.util.List;
@@ -8,23 +8,23 @@ import java.util.Optional;
 
 public interface IAerolineaService {
 
-    Aerolinea guardarAerolinea (Aerolinea aerolinea);
+    AerolineaDto guardarAerolinea (AerolineaDto aerolinea);
 
-    Optional<Aerolinea> buscarAerolineaPorId (Long id);
+    Optional<AerolineaDto> buscarAerolineaPorId (Long id);
 
-    List<Aerolinea> buscarAerolineasPorIds (Collection<Long> ids);
+    List<AerolineaDto> buscarAerolineasPorIds (Collection<Long> ids);
 
-    Optional<Aerolinea> buscarAerolineaPorCodigo (String codigo);
+    Optional<AerolineaDto> buscarAerolineaPorCodigo (String codigo);
 
-    List<Aerolinea> buscarAerolineas ();
+    List<AerolineaDto> buscarAerolineas ();
 
-    List<Aerolinea> buscarAerolineasPorNombre (String nombre);
+    List<AerolineaDto> buscarAerolineasPorNombre (String nombre);
 
-    List<Aerolinea> buscarAerolineasPorPaisOrigen (String paisOrigen);
+    List<AerolineaDto> buscarAerolineasPorPaisOrigen (String paisOrigen);
 
-    List<Aerolinea> buscarAerolineasPorNombreYPaisOrigen (String nombre, String paisOrigen);
+    List<AerolineaDto> buscarAerolineasPorNombreYPaisOrigen (String nombre, String paisOrigen);
 
-    Optional<Aerolinea> actualizarAerolinea (Long id, Aerolinea aerolinea);
+    Optional<AerolineaDto> actualizarAerolinea (Long id, AerolineaDto aerolinea);
 
     void eliminarAerolinea (Long id);
 

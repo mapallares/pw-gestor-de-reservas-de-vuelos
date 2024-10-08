@@ -1,6 +1,7 @@
 package com.pw.gestorreservasvuelos.controllers;
 
-import com.pw.gestorreservasvuelos.entities.Aerolinea;
+import com.pw.gestorreservasvuelos.dto.AerolineaDto;
+import com.pw.gestorreservasvuelos.exceptions.AerolineaNotFoundException;
 import com.pw.gestorreservasvuelos.services.AerolineaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,36 +23,36 @@ public class AerolineaController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Aerolinea>> getAllAerolineas() {
+    public ResponseEntity<List<AerolineaDto>> getAllAerolineas() {
         return ResponseEntity.ok(aerolineaService.buscarAerolineas());
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Aerolinea> getAerolineaById(@PathVariable Long id) {
+    public ResponseEntity<AerolineaDto> getAerolineaById(@PathVariable Long id) {
         return aerolineaService.buscarAerolineaPorId(id)
                 .map(aerolinea -> ResponseEntity.ok().body(aerolinea))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseThrow(AerolineaNotFoundException::new);
     }
 
     @PostMapping()
-    public ResponseEntity<Aerolinea> createAerolinea(@RequestBody Aerolinea aerolinea) throws URISyntaxException {
+    public ResponseEntity<AerolineaDto> createAerolinea(@RequestBody AerolineaDto aerolinea) throws URISyntaxException {
         return createNewAerolinea(aerolinea);
     }
 
     @PutMapping("/id")
-    public ResponseEntity<Aerolinea> upatateAerolinea(@PathVariable Long id, @RequestBody Aerolinea newAerolinea) {
-        Optional<Aerolinea> aerolineaUpadated = aerolineaService.actualizarAerolinea(id, newAerolinea);
+    public ResponseEntity<AerolineaDto> updateAerolinea(@PathVariable Long id, @RequestBody AerolineaDto newAerolinea) {
+        Optional<AerolineaDto> aerolineaUpadated = aerolineaService.actualizarAerolinea(id, newAerolinea);
         return aerolineaUpadated.map(aerolinea -> ResponseEntity.ok(aerolinea))
                 .orElseGet(() -> {
                     return createNewAerolinea(newAerolinea);
                 });
     }
 
-    private ResponseEntity<Aerolinea> createNewAerolinea(Aerolinea aerolinea) {
-        Aerolinea newAerolinea = aerolineaService.guardarAerolinea(aerolinea);
+    private ResponseEntity<AerolineaDto> createNewAerolinea(AerolineaDto aerolinea) {
+        AerolineaDto newAerolinea = aerolineaService.guardarAerolinea(aerolinea);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(newAerolinea.getId())
+                .buildAndExpand(newAerolinea.id())
                 .toUri();
         return ResponseEntity.created(location).body(newAerolinea);
     }

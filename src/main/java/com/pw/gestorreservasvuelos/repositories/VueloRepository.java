@@ -17,7 +17,7 @@ public interface VueloRepository extends JpaRepository<Vuelo, Long> {
 
     Vuelo save (Vuelo vuelo);
 
-    Optional<Vuelo> findById (long id);
+    Optional<Vuelo> findById (Long id);
 
     List<Vuelo> findByIdIn (Collection<Long> ids);
 
@@ -37,9 +37,9 @@ public interface VueloRepository extends JpaRepository<Vuelo, Long> {
 
     List<Vuelo> findAllByAerolinea (Aerolinea aerolinea);
 
-    List<Vuelo> findAllByCapacidad (int capacidad);
+    List<Vuelo> findAllByCapacidad (Integer capacidad);
 
-    List<Vuelo> findAllByDuracion (int duracion);
+    List<Vuelo> findAllByDuracion (Integer duracion);
 
     List<Vuelo> findAllByFechaSalidaBetween (LocalDate fechaSalida1, LocalDate fechaSalida2);
 

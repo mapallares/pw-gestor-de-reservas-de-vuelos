@@ -40,10 +40,10 @@ public class Vuelo {
     private LocalTime horaSalida;
 
     @Column(nullable = false)
-    private int duracion;
+    private Integer duracion;
 
     @Column(nullable = false)
-    private int capacidad;
+    private Integer capacidad;
 
     @ManyToMany(mappedBy = "vuelos", fetch = FetchType.EAGER)
     private List<Reserva> reservas;
