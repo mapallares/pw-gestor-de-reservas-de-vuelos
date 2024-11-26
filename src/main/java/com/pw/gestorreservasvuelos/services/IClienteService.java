@@ -22,4 +22,12 @@ public interface IClienteService {
 
     void eliminarCliente (Long id);
 
+    Optional<ClienteDto> buscarClitentePorUsername(String username);
+
+    Optional<ClienteDto> buscarClitentePorEmail(String email);
+
+    Boolean existeClientePorUsername(String username);
+
+    Boolean existeClientePorEmail(String email);
+
 }

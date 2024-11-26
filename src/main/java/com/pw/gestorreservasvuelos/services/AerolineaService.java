@@ -48,28 +48,28 @@ public class AerolineaService implements IAerolineaService {
     @Override
     public List<AerolineaDto> buscarAerolineas() {
         List<AerolineaDto> aerolineas = new ArrayList<>();
-        aerolineaRepository.findAll().forEach(aerolinea -> aerolineas.add(aerolineaMapper.aerolineaToAerolineaDtoWithoutId(aerolinea)));
+        aerolineaRepository.findAll().forEach(aerolinea -> aerolineas.add(aerolineaMapper.aerolineaToAerolineaDto(aerolinea)));
         return aerolineas;
     }
 
     @Override
     public List<AerolineaDto> buscarAerolineasPorNombre(String nombre) {
         List<AerolineaDto> aerolineas = new ArrayList<>();
-        aerolineaRepository.findAllByNombre(nombre).forEach(aerolinea -> aerolineas.add(aerolineaMapper.aerolineaToAerolineaDtoWithoutId(aerolinea)));
+        aerolineaRepository.findAllByNombre(nombre).forEach(aerolinea -> aerolineas.add(aerolineaMapper.aerolineaToAerolineaDto(aerolinea)));
         return aerolineas;
     }
 
     @Override
     public List<AerolineaDto> buscarAerolineasPorPaisOrigen(String paisOrigen) {
         List<AerolineaDto> aerolineas = new ArrayList<>();
-        aerolineaRepository.findAllByPaisOrigen(paisOrigen).forEach(aerolinea -> aerolineas.add(aerolineaMapper.aerolineaToAerolineaDtoWithoutId(aerolinea)));
+        aerolineaRepository.findAllByPaisOrigen(paisOrigen).forEach(aerolinea -> aerolineas.add(aerolineaMapper.aerolineaToAerolineaDto(aerolinea)));
         return aerolineas;
     }
 
     @Override
     public List<AerolineaDto> buscarAerolineasPorNombreYPaisOrigen(String nombre, String paisOrigen) {
         List<AerolineaDto> aerolineas = new ArrayList<>();
-        aerolineaRepository.findAllByNombreAndPaisOrigen(nombre, paisOrigen).forEach(aerolinea -> aerolineas.add(aerolineaMapper.aerolineaToAerolineaDtoWithoutId(aerolinea)));
+        aerolineaRepository.findAllByNombreAndPaisOrigen(nombre, paisOrigen).forEach(aerolinea -> aerolineas.add(aerolineaMapper.aerolineaToAerolineaDto(aerolinea)));
         return aerolineas;
     }
 

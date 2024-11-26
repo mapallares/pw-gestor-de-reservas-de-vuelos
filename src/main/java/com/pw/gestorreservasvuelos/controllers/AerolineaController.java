@@ -1,9 +1,11 @@
 package com.pw.gestorreservasvuelos.controllers;
 
 import com.pw.gestorreservasvuelos.dto.AerolineaDto;
+import com.pw.gestorreservasvuelos.exceptions.AerolineaAlreadyExistException;
 import com.pw.gestorreservasvuelos.exceptions.AerolineaNotFoundException;
 import com.pw.gestorreservasvuelos.services.AerolineaService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,33 +24,38 @@ public class AerolineaController {
         this.aerolineaService = aerolineaService;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping()
     public ResponseEntity<List<AerolineaDto>> getAllAerolineas() {
         return ResponseEntity.ok(aerolineaService.buscarAerolineas());
     }
 
-    @GetMapping("/id")
+    @CrossOrigin(origins = "*")
+    @GetMapping("/{id}")
     public ResponseEntity<AerolineaDto> getAerolineaById(@PathVariable Long id) {
         return aerolineaService.buscarAerolineaPorId(id)
                 .map(aerolinea -> ResponseEntity.ok().body(aerolinea))
-                .orElseThrow(AerolineaNotFoundException::new);
+                .orElseThrow(() -> new AerolineaNotFoundException("Aerolinea con id <" + id + "> no encontrada"));
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping()
     public ResponseEntity<AerolineaDto> createAerolinea(@RequestBody AerolineaDto aerolinea) throws URISyntaxException {
         return createNewAerolinea(aerolinea);
     }
 
-    @PutMapping("/id")
+    @CrossOrigin(origins = "*")
+    @PutMapping("/{id}")
     public ResponseEntity<AerolineaDto> updateAerolinea(@PathVariable Long id, @RequestBody AerolineaDto newAerolinea) {
         Optional<AerolineaDto> aerolineaUpadated = aerolineaService.actualizarAerolinea(id, newAerolinea);
         return aerolineaUpadated.map(aerolinea -> ResponseEntity.ok(aerolinea))
-                .orElseGet(() -> {
-                    return createNewAerolinea(newAerolinea);
-                });
+                .orElseThrow(() -> new AerolineaNotFoundException("Aerolinea con id <" + id + "> no encontrada"));
     }
 
     private ResponseEntity<AerolineaDto> createNewAerolinea(AerolineaDto aerolinea) {
+        if(aerolineaService.buscarAerolineaPorCodigo(aerolinea.codigoAerolinea()).isPresent()) {
+            throw new AerolineaAlreadyExistException("El código de aerolinea <" + aerolinea.codigoAerolinea() + "> ya se ha utilizado");
+        }
         AerolineaDto newAerolinea = aerolineaService.guardarAerolinea(aerolinea);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -57,8 +64,12 @@ public class AerolineaController {
         return ResponseEntity.created(location).body(newAerolinea);
     }
 
-    @DeleteMapping("/id")
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAerolinea(@PathVariable Long id) {
+        if (!aerolineaService.buscarAerolineaPorId(id).isPresent()) {
+            throw new AerolineaNotFoundException("Aerolinea con id <" + id + "> no encontrada");
+        }
         aerolineaService.eliminarAerolinea(id);
         return ResponseEntity.noContent().build();
     }

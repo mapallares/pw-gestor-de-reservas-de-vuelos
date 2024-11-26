@@ -41,49 +41,49 @@ public class AeropuertoService implements IAeropuertoService {
     @Override
     public List<AeropuertoDto> buscarAeropuestosPorIds(Collection<Long> ids) {
         List<AeropuertoDto> aeropuertos = new ArrayList<>();
-        aeropuertoRepository.findByIdIn(ids).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDtoWithoutId(aeropuerto)));
+        aeropuertoRepository.findByIdIn(ids).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDto(aeropuerto)));
         return aeropuertos;
     }
 
     @Override
     public List<AeropuertoDto> buscarAeropuertos() {
         List<AeropuertoDto> aeropuertos = new ArrayList<>();
-        aeropuertoRepository.findAll().forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDtoWithoutId(aeropuerto)));
+        aeropuertoRepository.findAll().forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDto(aeropuerto)));
         return aeropuertos;
     }
 
     @Override
     public List<AeropuertoDto> buscarAeropuertosPorPais(String pais) {
         List<AeropuertoDto> aeropuertos = new ArrayList<>();
-        aeropuertoRepository.findAllByPais(pais).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDtoWithoutId(aeropuerto)));
+        aeropuertoRepository.findAllByPais(pais).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDto(aeropuerto)));
         return aeropuertos;
     }
 
     @Override
     public List<AeropuertoDto> buscarAeropuertosPorCiudad(String ciudad) {
         List<AeropuertoDto> aeropuertos = new ArrayList<>();
-        aeropuertoRepository.findAllByCiudad(ciudad).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDtoWithoutId(aeropuerto)));
+        aeropuertoRepository.findAllByCiudad(ciudad).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDto(aeropuerto)));
         return aeropuertos;
     }
 
     @Override
     public List<AeropuertoDto> buscarAeropuertosPorPaisOCiudad(String pais, String ciudad) {
         List<AeropuertoDto> aeropuertos = new ArrayList<>();
-        aeropuertoRepository.findAllByPaisOrCiudad(pais, ciudad).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDtoWithoutId(aeropuerto)));
+        aeropuertoRepository.findAllByPaisOrCiudad(pais, ciudad).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDto(aeropuerto)));
         return aeropuertos;
     }
 
     @Override
     public List<AeropuertoDto> buscarAeropuertosPorPaisYCiudad(String pais, String ciudad) {
         List<AeropuertoDto> aeropuertos = new ArrayList<>();
-        aeropuertoRepository.findAllByPaisAndCiudad(pais, ciudad).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDtoWithoutId(aeropuerto)));
+        aeropuertoRepository.findAllByPaisAndCiudad(pais, ciudad).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDto(aeropuerto)));
         return aeropuertos;
     }
 
     @Override
     public List<AeropuertoDto> buscarAeropuertosPorNombre(String nombre) {
         List<AeropuertoDto> aeropuertos = new ArrayList<>();
-        aeropuertoRepository.findAllByNombre(nombre).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDtoWithoutId(aeropuerto)));
+        aeropuertoRepository.findAllByNombre(nombre).forEach(aeropuerto -> aeropuertos.add(aeropuertoMapper.aeropuertoToAeropuertoDto(aeropuerto)));
         return aeropuertos;
     }
 

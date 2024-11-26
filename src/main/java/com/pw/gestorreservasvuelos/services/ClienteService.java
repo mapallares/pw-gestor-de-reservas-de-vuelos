@@ -2,6 +2,7 @@ package com.pw.gestorreservasvuelos.services;
 
 import com.pw.gestorreservasvuelos.dto.ClienteDto;
 import com.pw.gestorreservasvuelos.dto.ClienteMapper;
+import com.pw.gestorreservasvuelos.entities.Cliente;
 import com.pw.gestorreservasvuelos.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,26 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
+    public Optional<ClienteDto> buscarClitentePorUsername(String username) {
+        return clienteRepository.findByUsername(username).map(cliente -> clienteMapper.clienteToClienteDto(cliente));
+    }
+
+    @Override
+    public Optional<ClienteDto> buscarClitentePorEmail(String email) {
+        return clienteRepository.findByEmail(email).map(cliente -> clienteMapper.clienteToClienteDto(cliente));
+    }
+
+    @Override
+    public Boolean existeClientePorUsername(String username) {
+        return clienteRepository.existsByUsername(username);
+    }
+
+    @Override
+    public Boolean existeClientePorEmail(String email) {
+        return clienteRepository.existsByEmail(email);
+    }
+
+    @Override
     public Optional<ClienteDto> buscarClientePorId(Long id) {
         return clienteRepository.findById(id).map(cliente -> clienteMapper.clienteToClienteDto(cliente));
     }
@@ -36,7 +57,7 @@ public class ClienteService implements IClienteService {
     @Override
     public List<ClienteDto> buscarClientes() {
         List<ClienteDto> clientes = new ArrayList<>();
-        clienteRepository.findAll().forEach(cliente -> clientes.add(clienteMapper.clienteToClienteDtoWithoutId(cliente)));
+        clienteRepository.findAll().forEach(cliente -> clientes.add(clienteMapper.clienteToClienteDto(cliente)));
         return clientes;
     }
 
@@ -50,7 +71,7 @@ public class ClienteService implements IClienteService {
     @Override
     public List<ClienteDto> buscarClientesPorNombre(String nombre) {
         List<ClienteDto> clientes = new ArrayList<>();
-        clienteRepository.findAllByNombre(nombre).forEach(cliente -> clientes.add(clienteMapper.clienteToClienteDtoWithoutId(cliente)));
+        clienteRepository.findAllByNombre(nombre).forEach(cliente -> clientes.add(clienteMapper.clienteToClienteDto(cliente)));
         return clientes;
     }
 
@@ -62,7 +83,8 @@ public class ClienteService implements IClienteService {
             oldCliente.setFechaNacimiento(cliente.fechaNacimiento());
             oldCliente.setDireccion(cliente.direccion());
             oldCliente.setTelefono(cliente.telefono());
-            oldCliente.setCorreoElectronico(cliente.correoElectronico());
+            oldCliente.setEmail(cliente.email());
+            oldCliente.setUsername(cliente.username());
             return clienteMapper.clienteToClienteDto(clienteRepository.save(oldCliente));
         });
     }
