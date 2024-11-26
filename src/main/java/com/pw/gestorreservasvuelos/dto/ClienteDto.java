@@ -8,5 +8,7 @@ public record ClienteDto(Long id,
                          LocalDate fechaNacimiento,
                          String direccion,
                          String telefono,
-                         String correoElectronico) {
+                         String email,
+                         String username,
+                         String password) {
 }

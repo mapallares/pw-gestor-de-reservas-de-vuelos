@@ -30,7 +30,7 @@ public class Pasajero {
     private String identificacion;
 
     @Column(nullable = false)
-    private String correoElectronico;
+    private String email;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_reserva")

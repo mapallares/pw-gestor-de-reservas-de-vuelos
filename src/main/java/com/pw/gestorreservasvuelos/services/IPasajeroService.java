@@ -1,6 +1,7 @@
 package com.pw.gestorreservasvuelos.services;
 
 import com.pw.gestorreservasvuelos.dto.PasajeroDto;
+import com.pw.gestorreservasvuelos.dto.ReservaDto;
 import com.pw.gestorreservasvuelos.entities.Reserva;
 
 import java.util.Collection;
@@ -29,7 +30,7 @@ public interface IPasajeroService {
 
     List<PasajeroDto> buscarPasajerosPorReserva (Reserva reserva);
 
-    Optional<PasajeroDto> actualizarPasajero (Long id, PasajeroDto pasajero);
+    Optional<PasajeroDto> actualizarPasajero (Long id, PasajeroDto pasajero, ReservaDto reserva);
 
     void eliminarPasajero (Long id);
 

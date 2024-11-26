@@ -1,9 +1,11 @@
 package com.pw.gestorreservasvuelos.controllers;
 
 import com.pw.gestorreservasvuelos.dto.ClienteDto;
+import com.pw.gestorreservasvuelos.exceptions.ClienteAlreadyExistException;
 import com.pw.gestorreservasvuelos.exceptions.ClienteNotFoundException;
 import com.pw.gestorreservasvuelos.services.ClienteService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,33 +24,42 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping()
     public ResponseEntity<List<ClienteDto>> getAllClientes() {
         return ResponseEntity.ok(clienteService.buscarClientes());
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<ClienteDto> getClienteById(@PathVariable Long id) {
-        return clienteService.buscarClientePorId(id)
+    @CrossOrigin(origins = "*")
+    @GetMapping("/{username}")
+    public ResponseEntity<ClienteDto> getClienteByUsername(@PathVariable String username) {
+        return clienteService.buscarClitentePorUsername(username)
                 .map(cliente -> ResponseEntity.ok().body(cliente))
-                .orElseThrow(ClienteNotFoundException::new);
+                .orElseThrow(() -> new ClienteNotFoundException("Cliente con username <" + username + "> no encontrado"));
     }
 
+    @CrossOrigin(origins = "*")
     @PostMapping()
     public ResponseEntity<ClienteDto> createCliente(@RequestBody ClienteDto cliente) throws URISyntaxException {
         return createNewCliente(cliente);
     }
 
-    @PutMapping("/id")
+    @CrossOrigin(origins = "*")
+    @PutMapping("/{id}")
     public ResponseEntity<ClienteDto> updateCliente(@PathVariable Long id, @RequestBody ClienteDto newCliente) {
         Optional<ClienteDto> clienteUpadated = clienteService.actualizarCliente(id, newCliente);
         return clienteUpadated.map(cliente -> ResponseEntity.ok(cliente))
-                .orElseGet(() -> {
-                    return createNewCliente(newCliente);
-                });
+                .orElseThrow(() -> new ClienteNotFoundException("Cliente con id <" + id + "> no encontrado"));
     }
 
+    @CrossOrigin(origins = "*")
     private ResponseEntity<ClienteDto> createNewCliente(ClienteDto cliente) {
+        if (clienteService.existeClientePorUsername(cliente.username())) {
+            throw new ClienteAlreadyExistException("El nombre de usuario <" + cliente.username() + "> ya está en uso");
+        }
+        if (clienteService.existeClientePorEmail(cliente.email())) {
+            throw new ClienteAlreadyExistException("El email <" + cliente.email() + "> ya está en uso");
+        }
         ClienteDto newCliente = clienteService.guardarCliente(cliente);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -57,8 +68,12 @@ public class ClienteController {
         return ResponseEntity.created(location).body(newCliente);
     }
 
-    @DeleteMapping("/id")
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCliente(@PathVariable Long id) {
+        if(!clienteService.buscarClientePorId(id).isPresent()) {
+            throw new ClienteNotFoundException("Cliente con id <" + id + "> encontrado");
+        }
         clienteService.eliminarCliente(id);
         return ResponseEntity.noContent().build();
     }

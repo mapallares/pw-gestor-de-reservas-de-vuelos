@@ -7,5 +7,5 @@ public record PasajeroDto(Long id,
                           String apellido,
                           LocalDate fechaNacimiento,
                           String identificacion,
-                          String correoElectronico) {
+                          String email) {
 }
