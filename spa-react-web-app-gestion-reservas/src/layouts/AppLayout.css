@@ -1,0 +1,428 @@
+body {
+    width: 100%;
+    height: 100dvh;
+}
+
+.pw-app-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pw-app-header {
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.pw-app-header-logo {
+    width: 100%;
+    max-width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.pw-app-header-logo h2 {
+    white-space: nowrap;
+    font-weight: 300;
+    color: var(--pw-color-white);
+}
+
+.pw-app-header-session {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 10px;
+}
+
+.pw-app-header-session-user {
+    width: 100%;
+    max-width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    user-select: none;
+}
+
+.pw-app-header-session-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    background: rgb(47, 186, 255);
+    color: #fff;
+    display: grid;
+    place-items: center;
+}
+
+.pw-app-header-session-user-info {
+    color: #fff;
+}
+
+.pw-app-header-session-user-info p {
+    font-size: 13px;
+}
+
+.pw-app-main-principal {
+    width: 100%;
+    min-height: 60dvh;
+    background: url('../assets/world.svg');
+    background-size: cover;
+    background-position: 50% 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.pw-app-main-principal-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pw-app-main-principal-content {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pw-app-main-principal-content h1 {
+    font-size: 2.2rem;
+}
+
+.pw-app-main-search {
+    width: 100%;
+    max-width: 1200px;
+    padding: 30px;
+    background: var(--pw-color-white);
+    border: 0.01rem solid var(--pw-color-border);
+    border-radius: 20px;
+    margin: 0 auto;
+    transform: translateY(80px);
+}
+
+.pw-app-section-search {
+    width: 100%;
+    background-color: #f2f2f2;
+}
+
+.pw-app-main-search-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.pw-app-main-search-pickers {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow: auto;
+}
+
+.pw-app-main-search-picker {
+    width: 100%;
+    max-width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 0.01rem solid var(--pw-color-border);
+    border-radius: 16px;
+    position: relative;
+}
+
+.pw-app-main-search-picker .pw-app-main-search-picker-item:first-child {
+    border-right: 0.01rem solid var(--pw-color-border);
+    padding: 20px 40px 20px 20px;
+
+}
+
+.pw-app-main-search-picker-item {
+    padding: 20px 20px 20px 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pw-app-main-search-picker-item-icon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    min-height: 30px;
+    background: var(--pw-color-accent);
+    border-radius: 100px;
+    color: #fff;
+    display: grid;
+    place-items: center;
+}
+
+.pw-app-main-search-picker-item-icon span {
+    font-size: 18px;
+}
+
+.pw-app-main-search-picker-item-icon-variant {
+    background: #fff;
+    color: #2a51ff;
+    border: 0.01rem solid var(--pw-color-border);
+}
+
+.pw-app-main-search-picker-item-swap {
+    position: absolute;
+}
+
+.pw-app-main-search-picker-item-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pw-app-main-search-picker-item-info label {
+    font-weight: 500;
+    color: var(--pw-color-text-softer);
+    font-size: 12px;
+    margin: 0 0 10px 0;
+}
+
+.pw-app-main-search-picker-item-info select {
+    border: none;
+    outline: none;
+    width: 100%;
+    min-width: 200px;
+    font-weight: 500;
+}
+
+.pw-app-main-search-picker-item-info input {
+    border: none;
+    outline: none;
+    font-weight: 500;
+}
+
+/*LANDING*/
+
+.pw-app-landing-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pw-app-landing-header {
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.pw-app-landing-header-logo {
+    width: 100%;
+    max-width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.pw-app-landing-header-logo h2 {
+    white-space: nowrap;
+    font-weight: 300;
+    color: var(--pw-color-white);
+}
+
+.pw-app-landing-header-session {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    gap: 10px;
+}
+
+.pw-app-landing-main-principal {
+    width: 100%;
+    min-height: 100dvh;
+    background: url('../assets/world.svg');
+    background-size: cover;
+    background-position: 0 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.pw-app-landing-main-principal-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pw-app-landing-main-principal-content {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pw-app-landing-main-principal-content h1 {
+    font-size: 2.2rem;
+}
+
+.pw-app-landing-main-search {
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    perspective: 100vw;
+}
+
+.pw-app-landing-main-search .pw-content-vuelos-vuelo {
+    max-width: 500px;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.pw-app-landing-main-search .pw-content-vuelos-vuelo:hover {
+    opacity: 0.9;
+    transform: scale(1.1) rotate3d(1, 0, 0, 20deg);
+}
+
+.pw-app-landing-main-search .pw-content-vuelos-vuelo-divider::after, 
+.pw-app-landing-main-search .pw-content-vuelos-vuelo-divider::before {
+    background-color: #101010;
+}
+
+.pw-app-section-results {
+    width: 100%;
+    height: 100%;
+    padding: 200px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pw-app-section-results-empty {
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.pw-app-result {
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    border: 0.01rem solid var(--pw-color-border);
+    border-radius: 16px;
+    display: flex;
+    gap: 20px;
+}
+
+.pw-app-result-vuelos {
+    width: 100%;
+    background-color: #ffece4;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+}
+
+.pw-app-reservas-modal {
+    width: 100%;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.pw-app-reservas-modal h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pw-app-reserva-modal {
+    width: 100%;
+    height: 100%;
+    max-height: 90dvh;
+    overflow: auto;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.pw-app-reserva-modal h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pw-app-reserva-modal-vuelos {
+    width: 100%;
+    padding: 10px;
+    background: #ffece4;
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    border-radius: 12px;
+}
+
+.pw-app-reservas-reserva-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin: 16px 0;
+    user-select: none;
+    transition: all 0.3s ease;
+  }
+
+  .pw-app-reservas-reserva-card:hover {
+    background: var(--pw-color-accent-dimed);
+    cursor: pointer;
+  }
+  
+  .pw-app-reservas-reserva-card-id {
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1.5em;
+    color: var(--pw-color-accent);
+  }
+  
+  .pw-app-reservas-reserva-card-info {
+    margin: 4px 0;
+    color: #555;
+  }
+  
+  .pw-app-reservas-reserva-card-info strong {
+    color: #000;
+  }
+  

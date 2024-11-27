@@ -1,0 +1,33 @@
+.pw-content-clientes {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.pw-content-clientes-table {
+    width: 100%;
+    border: 0.01rem solid var(--pw-color-border);
+    border-radius: 20px;
+    overflow: auto;
+    margin: 20px 0;
+}
+
+.pw-content-clientes-table-row-adulto {
+    color: var(--pw-color-danger);
+    background: var(--pw-color-danger-dimed);
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.pw-content-clientes-table-row-telefono {
+    font-weight: 500;
+}
+
+.pw-content-clientes-table-row-email {
+    background: var(--pw-color-accent-dimed);
+    color: var(--pw-color-accent);
+    border-radius: 100px;
+    padding: 5px 10px;
+}

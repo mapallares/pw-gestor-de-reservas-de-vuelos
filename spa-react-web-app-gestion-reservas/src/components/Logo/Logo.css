@@ -1,0 +1,30 @@
+.pw-logo {
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.pw-logo svg{
+    width: 100%;
+    height: -webkit-fill-available;
+}
+
+.pw-logo-size-xs {
+    max-width: var(--pw-logo-size-xs);
+}
+
+.pw-logo-size-s {
+    max-width: var(--pw-logo-size-s);
+}
+
+.pw-logo-size-m {
+    max-width: var(--pw-logo-size-m);
+}
+
+.pw-logo-size-l {
+    max-width: var(--pw-logo-size-l);
+}
+
+.pw-logo-size-xl {
+    max-width: var(--pw-logo-size-xl);
+}
