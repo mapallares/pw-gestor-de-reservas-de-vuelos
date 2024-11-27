@@ -1,0 +1,50 @@
+.pw-notfound {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--pw-color-black);
+    background-image: var(--pw-background-pattern);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.pw-notfound-card {
+    width: 100%;
+    max-width: 300px;
+    background: var(--pw-color-white);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pw-notfound-card h1 {
+    color: var(--pw-color-danger);
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.pw-notfound-card h2 {
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: -2pt;
+}
+
+.pw-notfound-card::after {
+    content: '404';
+    position: absolute;
+    font-size: 60vw;
+    color: rgba(255, 255, 255, 0.1);
+    font-weight: 900;
+    z-index: -1;
+}

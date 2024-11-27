@@ -1,0 +1,44 @@
+.typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 4s steps(20, end);
+    position: relative;
+}
+
+.typewriter::after {
+    content: '';
+    width: 10px;
+    height: 100%;
+    background: var(--pw-color-accent);
+    position: absolute;
+    right: 0;
+    animation: blink 0.3s infinite;
+}
+
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    from {
+        background: transparent;
+    }
+
+    to {
+        background: #fff;
+    }
+}
+
+.typewriter-content {
+    text-align: center; 
+    padding: 20px;
+    transform: scale(1.3);
+}

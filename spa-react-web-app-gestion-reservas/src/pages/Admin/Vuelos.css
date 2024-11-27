@@ -1,0 +1,206 @@
+.pw-content-vuelos {
+    width: 100%;
+    height: 100%;
+}
+
+.pw-content-vuelos-head {
+    padding: 20px;
+    margin: 0 0 20px 0;
+}
+
+.pw-content-vuelos-table {
+    width: 100%;
+    border: 0.01rem solid var(--pw-color-border);
+    border-radius: 20px;
+    overflow: auto;
+    margin: 20px 0;
+}
+
+.pw-content-vuelos-table-container{
+    width: 100%;
+    padding: 20px;
+}
+
+.pw-content-vuelos-modal {
+    width: 100%;
+    max-width: 700px;
+    padding: 50px;
+    background-color: #fff;
+    border-radius: 16px;
+    border: 0.01rem solid var(--pw-color-border);
+    animation: popup 0.5s;
+}
+
+.pw-content-vuelos-vuelos {
+    width: 100%;
+    padding: 20px;
+    background: #ffece4;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+}
+
+.pw-content-vuelos-vuelos-empty {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    color: var(--pw-color-accent);
+    font-weight: 500;
+}
+
+.pw-content-vuelos-vuelo {
+    width: 100%;
+    min-width: 360px;
+    max-width: 360px;
+    background-color: #fff;
+    border-radius: 26px;
+}
+
+.pw-content-vuelos-vuelo-divider {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pw-content-vuelos-vuelo-divider-line {
+    width: 70%;
+    height: 0.01rem;
+    border-bottom: 0.1rem dashed var(--pw-color-border);
+}
+
+.pw-content-vuelos-vuelo-divider::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-color: #ffece4;
+    border-radius: 100px;
+    position: absolute;
+    left: -20px;
+}
+.pw-content-vuelos-vuelo-divider::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-color: #ffece4;
+    border-radius: 100px;
+    position: absolute;
+    right: -20px;
+}
+
+.pw-content-vuelos-vuelo-top {
+    padding: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.pw-content-vuelos-vuelo-top-origen {
+    width: 100%;
+    min-width: 100px;
+}
+
+.pw-content-vuelos-vuelo-top-origen h2 {
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -3pt;
+}
+
+.pw-content-vuelos-vuelo-top-origen p {
+    color: var(--pw-color-text-softer);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.pw-content-vuelos-vuelo-top-divider {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pw-content-vuelos-vuelo-top-divider-plane {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 10px 0;
+}
+
+.pw-content-vuelos-vuelo-top-divider-plane span {
+    position: absolute;
+    transform: rotate(45deg);
+    background: #fff;
+    border-radius: 4px;
+    color: var(--pw-color-text-softer);
+}
+
+.pw-content-vuelos-vuelo-top-divider-duracion {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.pw-content-vuelos-vuelo-top-divider-duracion span:first-child {
+    font-size: 20px;
+    color: var(--pw-color-text-softer);
+}
+
+.pw-content-vuelos-vuelo-top-divider-duracion-time {
+    color: var(--pw-color-text-softer);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 100px;
+    background: #000;
+    color: #fff;
+}
+
+.pw-content-vuelos-vuelo-top-destino {
+    width: 100%;
+    min-width: 100px;
+}
+
+.pw-content-vuelos-vuelo-top-destino h2 {
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -3pt;
+    text-align: right;
+}
+
+.pw-content-vuelos-vuelo-top-destino p {
+    color: var(--pw-color-text-softer);
+    font-size: 14px;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.pw-content-vuelos-vuelo-bottom {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.pw-content-vuelos-vuelo-bottom-detail {
+    width: 100%;
+}
+
+.pw-content-vuelos-vuelo-bottom-detail strong {
+    color: var(--pw-color-text-softer);
+    font-size: 12px;
+}
+
+
+.pw-content-vuelos-vuelo-bottom-detail p {
+    color: var(--pw-color-text-softer);
+    font-size: 14px;
+}
